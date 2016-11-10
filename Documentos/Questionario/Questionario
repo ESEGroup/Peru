@@ -1,0 +1,60 @@
+1 - Quem será responsável por inserir as informações no sistema? Todos podem inserir ou existirá um departamento/pessoas com privilegio de inserção? p.e Gecom, Caeng, Daeq, Secretarias....
+Administrador geral. Administradores de departamentos. Funcionários que solicitarem acesso para cadastro de eventos. Administradores devem confirmar o cadastro do evento pelo funcionário.
+
+2 - Caso qualquer um possa inserir, existe alguma política de controle/filtro do que pode ou não ser inserido?
+Administrador vai controlar o que será inserido ou não. 
+
+3 - Como vocês esperam que seja a política do que será exibido, visto que o painel tem uma dimensão limitada comparada com o número de eventos que podem existir. Pode se utilizar filtros (GET) no endereço da pagina web para exibir somente anúncios para aquela localidade? Quais seriam os critérios adotados para escolha dos anuncio exibidos em cada localidade, existe algum tipo de peso para cada critério?
+Inicialmente é por localidade/proximidade do local do evento. Mas quem criar o evento pode tb informar quais pontos deseja que o evento seja exibido.
+
+4 - As bolsas e estágios devem ser bidirecionalmente integrada com o sistema do time argentina ou podemos apenas utilizar os dados inseridos por eles como fonte? O nosso sistema deve permitir inserção de bolsas ou não?
+Vocês são consumidores das informações apenas. Não precisam prover nada para eles. 
+
+5 - As localidades devem ser divididas por campis ou por centros, quais seriam os locais de publicação? existe algum limite de número de centros escolhidos para determinado anúncio? pode-se implantar estrutura de arvore p.e UFRJ > Ilha do Fundão > CT - CCMN - CSS, nesse caso ao se inserir um anúncio para a UFRJ ele poderá aparecer em todos os centros.
+Dados mtos técnicos... Os locais sao onde tiverem os paineis disponíveis. A priori um em cada centro. 
+
+6 - Ao informar um anuncio, quais informações são mandatórias? Se centro e mandatório, como eu devo tratar um evento em toda a instituição?
+Isso faz mais parte da especificação. Quem criar o anúncio deve indicar em que painéis exibir. 
+
+7 - Qual e a taxa de atualização(Tempo) do painel, todos os anúncios devem ser trocados apos uma atualização ou existirão anúncios fixos?
+Isso deve ser configurado pelo administrador do sistema. 
+ 
+
+8 - Deve-se personificar o usuário? Uma vez que o sistema deve colher a reação do usuário ou essas reações serão só quantitativas? caso quantitativo, como prevenir spam de likes?
+Não deve haver personificação de usuário. Reações não são críticas para o sistema, então haver spam não é relevante para ser tratado. Pensem naqueles quadros de feedback de atendimento presentes em lojas. Isso é baixa prioridade tb.
+
+9 - Uma vez que visitante não possui nenhum registro na ufrj, como se pretende dar acesso a essa categoria, no caso de personificação do usuário?
+Não há personificação. 
+
+10 - Os eventos podem somente ser dentro dos campis da universidade?
+Sim. 
+
+11 - Existe algum período máximo para os anúncios ficarem disponíveis?
+Intervalo de publicação do anúncio deve ser provido no momento do seu cadastro.
+ 
+12 - Quais devem ser os filtros disponíveis para uma seleção especifica dos anúncios?
+Mto cedo pra definir isso. No momento penso em localidade e área de conhecimento relacionada com o evento. 
+
+13 - Os anúncios que ja ocorreram ou que foram "desanunciados", devem ser mantidos por razões históricas ou podem ser descartados da base de dados?
+Manter. 
+
+14 - Devemos ter 2 tipos (roles) de usuários (admin e visitante)? Ou devemos ter admin, docentes, alunos, funcionários e visitantes?
+Indiquei acima. 
+
+15 - Existe a necessidade de ter mais alguma interação do usuário com o anúncio além de curtir, amar e enfurecer? Se sim, quais?
+Só essas. 
+
+16 - Para visualizar os eventos, cursos e demais atividades é necessário que o usuário se autentique?
+Na visão administrativa, sim. No painel não. Não sei se entendi a pergunta.
+
+17 - Quais os campos necessários para o cadastro de cada tipo de usuário do sistema? Existe algum item não obrigatório?
+Mto cedo pra isso. 
+
+18 - Quais os dados necessários para a autenticação do usuário? E-mail e senha ou CPF e senha, DRE...? Existe mais alguma possibilidade?
+Mesmo q 17. 
+
+19 - Nos detalhes sobre os anúncios devemos permitir que o administrador, ao cadastrar o anúncio, escreva qualquer coisa num campo de texto livre? Existe um limite de caracteres?
+Mesmo q 17. 
+
+20 - É mandatório o preenchimento de todos os dados (detalhes, data, local, etc.) no cadastro de um anúncio, certo? Além disso, eles devem ter status quanto à sua "disponibilidade" ("Realizado", "Por vir" e "Ocorrendo", por exemplo)?
+Mesmo q 17. Mas a ideia é essa mesma. Informações básicas mais status. 
