@@ -10,3 +10,25 @@
 .navbar-default .navbar-nav>li>a {
     color: #fff;
 }
+
+.description {
+    font-size: larger;
+}
+
+.anuncios {
+    background-color: rgba(171, 208, 214, 0.67);
+}
+
+.evento.progress {
+    height: 15px;
+    margin-bottom: 2px;
+}
+
+.detalhes {
+    padding-top: 35px;
+}
+
+time {
+    font-family: initial;
+    padding-left: 2px;
+}
