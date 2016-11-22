@@ -11,7 +11,11 @@ class Anuncio(models.Model):
     data_criacao = models.DateTimeField(default=timezone.now)
     data_inicio  = models.DateTimeField()
     data_fim     = models.DateTimeField()
-    localidade   = models.CharField(max_length=50)
+    #localidade   = models.CharField(max_length=50)
+    localidade   = models.ForeignKey('Localidade')
+    aprovado     = models.BooleanField(default=False)
+    ap_pendente  = models.BooleanField(default=True)
+	
 
     def publicar(self):
         self.data_criacao = timezone.now()
@@ -27,7 +31,7 @@ class Anuncio(models.Model):
             return 100
         else:
             return (tempo_passado*100) / (intervalo_total)
-
+	
     def intervalo(self):
         return (self.data_fim - self.data_inicio).total_seconds()
 
@@ -45,3 +49,12 @@ class Anuncio(models.Model):
 
     def __str__(self):
         return self.titulo
+        
+class Localidade(models.Model):
+    id          = models.AutoField(primary_key=True)
+    nome        = models.CharField(max_length=50)
+    nome_filtro = models.CharField(max_length=10)
+    parent      = models.ForeignKey('Localidade', blank=True, null=True)
+    
+    def __str__(self):
+        return self.nome
