@@ -15,5 +15,5 @@ def anuncio(request, localidade = None):
         while currParentId.parent != None:
             localidades.append(currParentId.parent.id)
             currParentId = Localidade.objects.get(id=currParentId.parent.id)
-        anuncios = Anuncio.objects.all().filter(localidade_id__in=localidades)
+        anuncios = Anuncio.objects.all().filter(localidade_id__in=localidades).filter(aprovado=True)
     return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios})
