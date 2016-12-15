@@ -3,5 +3,6 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.anuncio),
-    url(r'^local=(?P<localidade>\w+)/', views.anuncio)
+    url(r'^local\=(?P<localidade>\w+)', views.anuncioPorLocal),
+    url(r'^busca', views.anuncioPorBusca),
 ]
