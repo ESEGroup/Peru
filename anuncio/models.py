@@ -60,7 +60,7 @@ class Anuncio(models.Model):
         self.save()
         return reacao
 
-    def __str__(self):
+    def __unicode__(self):
         return self.titulo
 
 class Localidade(models.Model):
@@ -69,5 +69,5 @@ class Localidade(models.Model):
     nome_filtro = models.CharField(max_length=10)
     parent      = models.ForeignKey('Localidade', blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.nome
