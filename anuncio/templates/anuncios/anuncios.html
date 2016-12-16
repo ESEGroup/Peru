@@ -1,20 +1,19 @@
 {% extends 'anuncios/layout.html' %}
 
 {% block content %}
-
 <div class="container">
 {% for anuncio in anuncios %}
     <div class="col-lg-4">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <strong>{{ anuncio.titulo }}</strong>
-                <button type="button" class="btn-actions btn pull-right btn-success">
+                <button type="button" name="delete" data-id="{{anuncio.id}}" class="btn-actions btn pull-right btn-success">
                     <span class="pull-right glyphicon glyphicon-remove"></span>
                 </button>
-                <button type="button" class="btn-actions btn pull-right btn-success">
+                <button type="button" name="aceitar" data-id="{{anuncio.id}}" class="btn-actions btn pull-right btn-success">
                     <span class="pull-right glyphicon glyphicon-ok"></span>
                 </button>
-                <button type="button" class="btn-actions pull-right btn btn-success">
+                <button type="button" name="editar" data-id="{{anuncio.id}}" class="btn-actions pull-right btn btn-success">
                     <span class="pull-right glyphicon glyphicon-pencil"></span>
                 </button>
             </div>
@@ -70,3 +69,4 @@
 {% endfor %}
 </div>
 {% endblock content %}
+
