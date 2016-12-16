@@ -16,4 +16,10 @@ $(document).ready( function() {
             $('*[data-id="'+anuncioId+'"]').children(badgeID).html(data);
         });
     });
+    $('button[name="delete"]').click(function(){
+        anuncioId = $(this).attr('data-id');
+        $.get('/delete/', {id: anuncioId}, function(data){
+            location.reload();
+        });
+    });
 });
