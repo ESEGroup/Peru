@@ -25,7 +25,11 @@
 }
 
 .detalhes {
-    padding-top: 35px;
+    padding-top: 15px;
+}
+
+.reactions {
+    padding-top: 15px;
 }
 
 time {
