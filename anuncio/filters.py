@@ -1,5 +1,6 @@
 from .models import Anuncio
 from .models import Localidade
+from django.contrib.auth.models import User
 from .util import escapeString
 
 ###################################################################################################
@@ -15,6 +16,7 @@ from .util import escapeString
 #
 #Utilizacao:
 #   getTodosAnuncios()
+#
 ####################################################################################################
 def getTodosAnuncios():
     anuncios = Anuncio.objects.all()
@@ -37,9 +39,10 @@ def getTodosAnuncios():
 #Utilizacao:
 #   getAnunciosPorLocalidade(localidade)
 #       localidade e uma string correspondente ao nome_filtro de uma localidade no banco de dados
+#
 ####################################################################################################
 def getAnunciosPorLocalidade(localidade):
-    currParentId = Localidade.objects.get(nome_filtro=localidade)
+    currParentId = Localidade.objects.get(nome_filtro=localidade.lower())
     localidades = list()
     localidades.append(currParentId.id)
     while currParentId.parent != None:
@@ -68,9 +71,30 @@ def getAnunciosPorLocalidade(localidade):
 #Observacoes:
 #   No SQLite valores booleanos sao armazenados como 0 (False) e 1 (True), portanto estes sao os
 #   valores testados nas queries customizadas.
+#
 ####################################################################################################
 def getAnunciosPorSubstring(string):
     safeString = escapeString(string)
     queryString = 'SELECT * FROM anuncio_anuncio WHERE aprovado=1 AND(titulo LIKE \'%' + safeString + '%\' OR descricao LIKE \'%' + safeString + '%\')'
     anuncios = Anuncio.objects.raw(queryString)
+    return anuncios
+    
+    
+###################################################################################################
+#Metodo que retorna anuncios do banco criados por um usuario especifico
+#
+#Nome: getAnunciosPorUsuario
+#Autor: Renan Basilio
+#Versao: 1.0
+#
+#Algoritmo:
+#   1. Recupera da tabela de anuncios todos os anuncios e filtra pelo id do usuario fornecido
+#
+#Utilizacao:
+#   getAnunciosPorUsuario(usuario)
+#       usuario e um objeto do tipo User do django
+#
+####################################################################################################
+def getAnunciosPorUsuario(usuario):
+    anuncios = Anuncio.objects.all().filter(anunciante=usuario.id)
     return anuncios
