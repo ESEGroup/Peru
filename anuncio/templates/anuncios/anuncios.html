@@ -33,6 +33,11 @@
                         </small>
                     </span>
                 </div>
+                <div class="reactions btn-group btn-group-xs pull-right" role="group">
+                    <button type="button" class="btn btn-success">Amar <span class="badge">{{anuncio.amar}}</span></button>
+                    <button type="button" class="btn btn-primary">Curtir <span class="badge">{{anuncio.curtir}}</span></button>
+                    <button type="button" class="btn btn-danger">Odiar <span class="badge">{{anuncio.odiar}}</span></button>
+                </div>
                 <div class="detalhes pull-right text-muted">
                     <small class="glyphicon glyphicon-calendar">
                         <time class="pull-right" datetime="2011-07-16"> {{anuncio.get_dt_criacao}}</time>
