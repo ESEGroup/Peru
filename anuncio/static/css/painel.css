@@ -32,6 +32,12 @@
     padding-top: 15px;
 }
 
+.btn-actions  {
+    padding: 6px 6px;
+    font-size: 9px;
+    background-color: rgba(162, 158, 156, 0.71);
+    border-color: #337ab7;
+}
 time {
     font-family: initial;
     padding-left: 2px;
