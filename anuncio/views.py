@@ -11,16 +11,16 @@ from .forms import formBusca
 # Create your views here.
 
 ###################################################################################################
-#View que renderiza todos os anuncios do banco de dados, independente de estarem aprovados ou não.
+#View que renderiza todos os anuncios do banco de dados, independente de estarem aprovados ou nao.
 #
 #Nome: anuncio
 #Autor: Renan Basilio
-#Versão: 1.0
+#Versao: 1.0
 #
 #Algoritmo:
-#   1. Chama o método getTodosAnuncios do módulo filters é armazena o resultado em 'anuncios'
+#   1. Chama o metodo getTodosAnuncios do modulo filters e armazena o resultado em 'anuncios'
 #   2. Inicializa uma form de busca
-#   3. Chama o método render com a lista de anúncios gerada e a form como parâmetros
+#   3. Chama o metodo render com a lista de anuncios gerada e a form como parametros
 #
 ####################################################################################################
 def anuncio(request):
@@ -28,37 +28,37 @@ def anuncio(request):
     form = formBusca()
     return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form})
 
-    
+
 ###################################################################################################
-#View que renderiza anúncios do banco de dados filtrados por localidade.
+#View que renderiza anuncios do banco de dados filtrados por localidade.
 #
 #Nome: anuncioPorLocal
 #Autor: Renan Basilio
-#Versão: 1.0
+#Versao: 1.0
 #
 #Algoritmo:
-#   1. Chama o método getAnunciosPorLocalidade com o parâmetro localidade fornecido pela url
+#   1. Chama o metodo getAnunciosPorLocalidade com o parametro localidade fornecido pela url
 #   2. Inicializa uma form de busca
-#   3. Chama o método render com a lista de anúncios gerada e a form como parâmetros
+#   3. Chama o metodo render com a lista de anuncios gerada e a form como parametros
 #
 ####################################################################################################
 def anuncioPorLocal(request, localidade):
     anuncios = getAnunciosPorLocalidade(localidade)
     form = formBusca()
     return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form})
-    
-    
+
+
 ###################################################################################################
-#View que renderiza anúncios do banco de dados filtrados por um termo de busca
+#View que renderiza anuncios do banco de dados filtrados por um termo de busca
 #
 #Nome: anuncioPorBusca
 #Autor: Renan Basilio
-#Versão: 1.0
+#Versao: 1.0
 #
 #Algoritmo:
 #   1. Inicializa uma form de busca
-#   2. Chama o método getAnunciosPorSubstring com o parâmetro 't' fornecido pela url
-#   3. Chama o método render com a lista de anúncios gerada e a form como parâmetros
+#   2. Chama o metodo getAnunciosPorSubstring com o parametro 't' fornecido pela url
+#   3. Chama o metodo render com a lista de anuncios gerada e a form como parametros
 #
 ####################################################################################################
 def anuncioPorBusca(request):
