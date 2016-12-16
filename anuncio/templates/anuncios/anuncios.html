@@ -33,23 +33,29 @@
                 <div>
                     <span>
                         <small class="glyphicon glyphicon-calendar">
-                            <time class="pull-right" datetime="2008-11-01"> {{anuncio.get_dt_inicio}}</time>
+                            <time class="pull-right" datetime="2008-11-01"> {{anuncio.getInicio}}</time>
                         </small>
                     </span>
                     <span class="pull-right">
                         <small class="glyphicon glyphicon-calendar">
-                            <time class="pull-right" datetime="2011-07-16"> {{anuncio.get_dt_fim}}</time>
+                            <time class="pull-right" datetime="2011-07-16"> {{anuncio.getFim}}</time>
                         </small>
                     </span>
                 </div>
                 <div class="reactions btn-group btn-group-xs pull-right" role="group">
-                    <button type="button" class="btn btn-success">Amar <span class="badge">{{anuncio.amar}}</span></button>
-                    <button type="button" class="btn btn-primary">Curtir <span class="badge">{{anuncio.curtir}}</span></button>
-                    <button type="button" class="btn btn-danger">Odiar <span class="badge">{{anuncio.odiar}}</span></button>
+                        <button data-type="amar" data-id="{{anuncio.id}}" type="button" class="btn btn-success">
+                            Amar <span id="acounter" class="badge">{{anuncio.amar}}</span>
+                        </button>
+                        <button data-type="curtir" data-id="{{anuncio.id}}" type="button" class="btn btn-primary">
+                            Curtir <span id="ccounter" class="badge">{{anuncio.curtir}}</span>
+                        </button>
+                        <button data-type="odiar" data-id="{{anuncio.id}}" type="button" class="btn btn-danger">
+                            Odiar <span id="ocounter" class="badge">{{anuncio.odiar}}</span>
+                        </button>
                 </div>
                 <div class="detalhes pull-right text-muted">
                     <small class="glyphicon glyphicon-calendar">
-                        <time class="pull-right" datetime="2011-07-16"> {{anuncio.get_dt_criacao}}</time>
+                        <time class="pull-right" datetime="2011-07-16"> {{anuncio.getCriacao}}</time>
                     </small>
                     <span class="glyphicon glyphicon-map-marker"></span>
                     <small>{{anuncio.localidade.nome}}</small>
@@ -64,11 +70,3 @@
 {% endfor %}
 </div>
 {% endblock content %}
-
-
-
-
-
-
-
-
