@@ -22,4 +22,10 @@ $(document).ready( function() {
             location.reload();
         });
     });
+    $('button[name="aceitar"]').click(function(){
+        anuncioId = $(this).attr('data-id');
+        $.get('/aprovar/', {id: anuncioId}, function(data){
+            location.reload();
+        });
+    });
 });
