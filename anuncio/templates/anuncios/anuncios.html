@@ -10,9 +10,11 @@
                 <button type="button" name="delete" data-id="{{anuncio.id}}" class="btn-actions btn pull-right btn-success">
                     <span class="pull-right glyphicon glyphicon-remove"></span>
                 </button>
+                {% if anuncio.ap_pendente == True and anuncio.aprovado == False %}
                 <button type="button" name="aceitar" data-id="{{anuncio.id}}" class="btn-actions btn pull-right btn-success">
                     <span class="pull-right glyphicon glyphicon-ok"></span>
                 </button>
+                {% endif %}
                 <button type="button" name="editar" data-id="{{anuncio.id}}" class="btn-actions pull-right btn btn-success">
                     <span class="pull-right glyphicon glyphicon-pencil"></span>
                 </button>
