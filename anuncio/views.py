@@ -78,3 +78,12 @@ def reacao(request):
             reacao = anuncio.incrementarReacao(reacaoType)
 
     return HttpResponse(reacao)
+
+def delete(request):
+    anuncioId = None
+    if request.method == 'GET':
+        anuncioId = request.GET.get('id')
+    if anuncioId:
+        anuncio = Anuncio.objects.get(id=int(anuncioId))
+        anuncio.delete()
+    return HttpResponse()
