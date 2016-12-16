@@ -6,4 +6,5 @@ urlpatterns = [
     url(r'^local\=(?P<localidade>\w+)', views.anuncioPorLocal),
     url(r'^busca', views.anuncioPorBusca),
     url(r'^reacao/$', views.reacao, name='reacao'),
+    url(r'^delete/$', views.delete, name='delete'),
 ]
