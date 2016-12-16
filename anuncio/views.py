@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django import forms
 from .models import Anuncio
 from .models import Localidade
@@ -65,3 +65,16 @@ def anuncioPorBusca(request):
     form = formBusca(request.GET)
     anuncios = getAnunciosPorSubstring(request.GET.get('t'))
     return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form})
+
+def reacao(request):
+    anuncioId = None
+    if request.method == 'GET':
+        anuncioId = request.GET.get('id')
+        reacaoType = request.GET.get('reacao')
+    reacao = 0
+    if anuncioId:
+        anuncio = Anuncio.objects.get(id=int(anuncioId))
+        if anuncio:
+            reacao = anuncio.incrementarReacao(reacaoType)
+
+    return HttpResponse(reacao)
