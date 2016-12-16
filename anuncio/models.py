@@ -11,11 +11,12 @@ class Anuncio(models.Model):
     data_criacao = models.DateTimeField(default=timezone.now)
     data_inicio  = models.DateTimeField()
     data_fim     = models.DateTimeField()
-    #localidade   = models.CharField(max_length=50)
     localidade   = models.ForeignKey('Localidade')
     aprovado     = models.BooleanField(default=False)
     ap_pendente  = models.BooleanField(default=True)
-	
+    curtir       = models.PositiveIntegerField(default=0)
+    amar         = models.PositiveIntegerField(default=0)
+    odiar        = models.PositiveIntegerField(default=0)
 
     def publicar(self):
         self.data_criacao = timezone.now()
