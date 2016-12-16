@@ -24,7 +24,7 @@ from .forms import formBusca
 #
 ####################################################################################################
 def anuncio(request):
-    anuncios = getTodosAnuncios()
+    anuncios = getTodosAnunciosValidos()
     form = formBusca()
     return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':"Localidade "})
 
@@ -91,6 +91,35 @@ def anuncioPorUsuario(request):
         anuncio(request)
         
         
+###################################################################################################
+#View que renderiza anuncios do banco de dados com aprovacao pendente
+#
+#Nome: anuncioPendendoAp
+#Autor: Renan Basilio
+#Versao: 0.1
+#
+#Algoritmo:
+#   1. Verifica se o usuario esta autenticado, se nao passa o controle para a view geral
+#   2. Se sim verifica se o usuario tem permissao para aprovar anuncios, se nao tiver passa o controle
+#      para a view geral
+#   3. Se sim:
+#       Inicializa form de busca
+#       Recupera os anuncios com aprovacao pendente pelo metodo getAnunciosApPendente
+#       Chama o metodo render
+#
+####################################################################################################
+def anuncioPendendoAp(request):
+    if request.user.is_authenticated():
+        if True:    ## Verificar se o usuario possui permissao para aprovar anuncios
+            form=formBusca()
+            anuncios = getAnunciosApPendente()
+            return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':"Localidade "})
+        else:
+            anuncio(request)
+    else:
+        anuncio(request)
+        
+        
 def reacao(request):
     anuncioId = None
     if request.method == 'GET':
@@ -119,7 +148,7 @@ def aprovar(request):
         anuncioId = request.GET.get('id')
     if anuncioId:
         anuncio = Anuncio.objects.get(id=int(anuncioId))
-        anuncio.aprovar = True
+        anuncio.aprovado = True
         anuncio.ap_pendente = False
         anuncio.save()
     return HttpResponse()

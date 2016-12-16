@@ -24,6 +24,26 @@ def getTodosAnuncios():
 
 
 ###################################################################################################
+#Metodo que retorna todos os anuncios aprovados do banco de dados
+#
+#Nome: getTodosAnunciosValidos
+#Autor: Renan Basilio
+#Versao: 1.0
+#
+#Algoritmo:
+#   Preenche uma lista com todos os objetos encontrados na tabela anuncios_Anuncio
+#   do Banco de Dados que tenham flag aprovado em True
+#
+#Utilizacao:
+#   getTodosAnunciosValidos()
+#
+####################################################################################################
+def getTodosAnunciosValidos():
+    anuncios = Anuncio.objects.all().filter(aprovado=True)
+    return anuncios
+
+    
+###################################################################################################
 #Metodo que retorna anuncios do banco de dados em uma localidade e todas as demais superiores a esta
 #na arvore de localidades
 #
@@ -97,4 +117,24 @@ def getAnunciosPorSubstring(string):
 ####################################################################################################
 def getAnunciosPorUsuario(usuario):
     anuncios = Anuncio.objects.all().filter(anunciante=usuario.id)
+    return anuncios
+    
+    
+###################################################################################################
+#Metodo que retorna anuncios do banco com marcados com aprovacao pendente
+#
+#Nome: getAnunciosPorUsuario
+#Autor: Renan Basilio
+#Versao: 1.0
+#
+#Algoritmo:
+#   1. Recupera da tabela de anuncios todos os anuncios e filtra pelo id do usuario fornecido
+#
+#Utilizacao:
+#   getAnunciosPorUsuario(usuario)
+#       usuario e um objeto do tipo User do django
+#
+#################################################################################################### 
+def getAnunciosApPendente():
+    anuncios = Anuncio.objects.all().filter(ap_pendente=True)
     return anuncios
