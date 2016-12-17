@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden
 from django import forms
 from .models import Anuncio
 from .models import Localidade
@@ -77,7 +77,7 @@ def anuncioPorBusca(request):
 #
 #Algoritmo:
 #   1. Verifica se o usuario esta autenticado
-#   2. Se nao passa o controle para a view geral
+#   2. Se nao retorna uma HttpResponseForbidden
 #   3. Se sim, inicializa form de busca e constroi lista de anuncios a partir do metodo getAnunciosPorUsuario
 #   4. Chama o metodo render
 #
@@ -88,7 +88,7 @@ def anuncioPorUsuario(request):
         anuncios = getAnunciosPorUsuario(request.user)
         return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':"Localidade "})
     else:
-        anuncio(request)
+        return HttpResponseForbidden()
         
         
 ###################################################################################################
@@ -99,7 +99,7 @@ def anuncioPorUsuario(request):
 #Versao: 0.1
 #
 #Algoritmo:
-#   1. Verifica se o usuario esta autenticado, se nao passa o controle para a view geral
+#   1. Verifica se o usuario esta autenticado, se nao retorna uma HttpResponseForbidden
 #   2. Se sim verifica se o usuario tem permissao para aprovar anuncios, se nao tiver passa o controle
 #      para a view geral
 #   3. Se sim:
@@ -115,9 +115,9 @@ def anuncioPendendoAp(request):
             anuncios = getAnunciosApPendente()
             return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':"Localidade "})
         else:
-            anuncio(request)
+            return HttpResponseForbidden()
     else:
-        anuncio(request)
+        return HttpResponseForbidden()
         
         
 def reacao(request):
