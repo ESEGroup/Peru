@@ -42,3 +42,42 @@ time {
     font-family: initial;
     padding-left: 2px;
 }
+.insert-form{
+    margin-bottom: 20px;
+}
+
+p.datetime {
+    margin-bottom: 20px;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+    color: #666;
+    font-weight: bold;
+}
+
+input[type=text], input[type=password], input[type=email], input[type=url], input[type=number], textarea, select, .vTextField {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 6px;
+    margin-top: 0;
+}
+
+textarea {
+    vertical-align: top;
+}
+
+ul.errorlist {
+    margin: 0 0 4px;
+    padding: 0;
+    color: #ba2121;
+    background: #fff;
+}
+
+ul.errorlist li:first-child {
+    margin-top: 0;
+}
+ul.errorlist li {
+    font-size: 13px;
+    display: block;
+    margin-bottom: 4px;
+}

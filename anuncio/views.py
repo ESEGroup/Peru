@@ -154,14 +154,15 @@ def aprovar(request):
     return HttpResponse()
 
 def inserirAnuncio(request):
+    form_busca = formBusca()
     if request.method == 'POST':
         form = formAnuncio(request.POST)
         if form.is_valid():
             form.save(commit=True)
-            return index(request)
+            return HttpResponseRedirect('/')
         else:
             print form.errors
     else:
         form = formAnuncio()
 
-    return render(request, 'anuncios/inserir.html', {'form': form})
+    return render(request, 'anuncios/inserir.html', {'formInsert':form, 'formBusca':form_busca, 'localidade':"Localidade "})

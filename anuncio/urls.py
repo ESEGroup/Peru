@@ -11,5 +11,5 @@ urlpatterns = [
     url(r'^aprovar/$', views.aprovar, name='aprovar'),
     url(r'^meus/$', views.anuncioPorUsuario),
     url(r'^pendentes/$', views.anuncioPendendoAp),
-    url(r'^inserir/$', views.inserirAnuncio, name='inserirAnuncio')
+    url(r'^inserir/$', views.inserirAnuncio)
 ]

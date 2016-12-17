@@ -2,6 +2,9 @@ from django import forms
 from .models import Anuncio, Localidade
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib.admin import widgets
+import datetime
+
 
 ###################################################################################################
 #Classe que representa uma form de busca contendo um unico campo t
@@ -16,17 +19,24 @@ from django.contrib.auth.models import User
 class formBusca(forms.Form):
     t = forms.CharField(max_length = 100, widget=forms.TextInput(attrs={'placeholder': 'Buscar Anuncios', 'class':'form-control'}))
 
-class formAnuncio(forms.Form):
-    anunciante   = forms.ModelChoiceField(queryset=User.objects.all())
-    titulo       = forms.CharField(max_length=200)
-    descricao    = forms.CharField(max_length=4000)
-    data_criacao = timezone.now
-    data_inicio  = forms.DateTimeField()
-    data_fim     = forms.DateTimeField()
-    localidade   = forms.ModelChoiceField(queryset=Localidade.objects.all())
+class formAnuncio(forms.ModelForm):
+    anunciante   = forms.ModelChoiceField(queryset=User.objects.all(), widget=forms.Select(attrs={'class': 'insert-form form-control'}))
+    titulo       = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': 'insert-form form-control'}))
+    descricao    = forms.CharField(max_length=4000, widget=forms.Textarea(attrs={'rows': 10, 'class': 'insert-form form-control'}))
+    data_inicio  = forms.SplitDateTimeField(widget=widgets.AdminSplitDateTime(attrs={'class': 'insert-form form-control datetimepicker'}))
+    data_fim     = forms.SplitDateTimeField(widget=widgets.AdminSplitDateTime(attrs={'class': 'insert-form form-control datetimepicker'}))
+    localidade   = forms.ModelChoiceField(queryset=Localidade.objects.all(), widget=forms.Select(attrs={'class': 'insert-form form-control'}))
+    aprovado     = forms.BooleanField(widget=forms.HiddenInput(), initial=False, required=False)
+    ap_pendente  = forms.BooleanField(widget=forms.HiddenInput(), initial=True, required=False)
+    data_criacao = forms.DateTimeField(widget=forms.HiddenInput(), initial=timezone.now, required=False)
 
     # An inline class to provide additional information on the form.
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Anuncio
-        exclude = ('anunciante', 'data_criacao')
+        exclude = ['odiar', 'amar', 'curtir']
+
+    def __init__(self, *args, **kwargs):
+        super(formAnuncio, self).__init__(*args, **kwargs)
+        self.fields['data_inicio'].widget = widgets.AdminSplitDateTime()
+        self.fields['data_fim'].widget = widgets.AdminSplitDateTime()
