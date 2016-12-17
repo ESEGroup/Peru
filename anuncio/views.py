@@ -6,7 +6,7 @@ from .models import Localidade
 from django.utils import timezone
 from datetime import datetime
 from .filters import *
-from .forms import formBusca
+from .forms import formBusca, formAnuncio
 
 # Create your views here.
 
@@ -152,3 +152,16 @@ def aprovar(request):
         anuncio.ap_pendente = False
         anuncio.save()
     return HttpResponse()
+
+def inserirAnuncio(request):
+    if request.method == 'POST':
+        form = formAnuncio(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return index(request)
+        else:
+            print form.errors
+    else:
+        form = formAnuncio()
+
+    return render(request, 'anuncios/inserir.html', {'form': form})
