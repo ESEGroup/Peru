@@ -1,4 +1,4 @@
-$(document).ready( function() {
+;(function($){
     $('button[data-type]').click(function(){
         type = $(this).attr('data-type');
         anuncioId = $(this).attr('data-id');
@@ -28,4 +28,4 @@ $(document).ready( function() {
             location.reload();
         });
     });
-});
+})(django.jQuery);
