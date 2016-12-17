@@ -1,0 +1,31 @@
+{% extends 'anuncios/layout.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        <form id="category_form" method="post" action="/inserir/">
+            {% csrf_token %}
+                <strong>Anunciante:</strong>
+                {{ formInsert.anunciante.errors }}
+                {{ formInsert.anunciante }}
+                <strong>Titulo:</strong>
+                {{ formInsert.titulo.errors }}
+                {{ formInsert.titulo }}
+                <strong>Descricao:</strong>
+                {{ formInsert.descricao.errors }}
+                {{ formInsert.descricao }}
+                <strong>Localidade:</strong>
+                {{ formInsert.localidade.errors }}
+                {{ formInsert.localidade }}
+                <strong>Data de Inicio:</strong>
+                {{ formInsert.data_inicio.errors }}
+                {{ formInsert.data_inicio }}
+                <strong>Data de Termino:</strong>
+                {{ formInsert.data_fim.errors }}
+                {{ formInsert.data_fim }}
+            <input class="form-control btn btn-primary" type="submit" name="submit" value="Criar Anuncio" />
+        </form>
+    </div>
+</div>
+{% endblock content %}
