@@ -227,7 +227,7 @@ class formUsuarioView(View):
 
                 if user.is_active:
                     login(request, user)
-                    return redirect('anuncios.index')
+                    return redirect('../')
         return render(request, self.template_name, {'form': form, 'formBusca':form_busca, 'localidade':"Localidade "})
 
 
