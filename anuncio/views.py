@@ -50,6 +50,7 @@ def anuncio(request):
 ####################################################################################################
 def anuncioPorLocal(request, localidade):
     anuncios = getAnunciosPorLocalidade(localidade)
+    edit_forms = getFormsEdicaoDeAnuncios(anuncios)
     nome_local = Localidade.objects.get(nome_filtro=localidade).nome + ' '
     form = formBusca()
     return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':nome_local, 'editforms':edit_forms})
@@ -72,7 +73,7 @@ def anuncioPorBusca(request):
     form = formBusca(request.GET)
     anuncios = getAnunciosPorSubstring(request.GET.get('t'))
     return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':"Localidade ", 'editforms':edit_forms})
-    
+
 
 ###################################################################################################
 #View que renderiza anuncios do banco de dados filtrados pelo usuario que os criou
@@ -95,8 +96,8 @@ def anuncioPorUsuario(request):
         return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':"Localidade ", 'editforms':edit_forms})
     else:
         return HttpResponseForbidden()
-        
-        
+
+
 ###################################################################################################
 #View que renderiza anuncios do banco de dados com aprovacao pendente
 #
@@ -124,8 +125,8 @@ def anuncioPendendoAp(request):
             return HttpResponseForbidden()
     else:
         return HttpResponseForbidden()
-        
-        
+
+
 def reacao(request):
     anuncioId = None
     if request.method == 'GET':
