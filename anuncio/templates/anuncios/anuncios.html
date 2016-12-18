@@ -15,7 +15,7 @@
                     <span class="pull-right glyphicon glyphicon-ok"></span>
                 </button>
                 {% endif %}
-                <button type="button" name="editar" data-id="{{anuncio.id}}" class="btn-actions pull-right btn btn-success">
+                <button type="button" name="editar" data-id="{{anuncio.id}}" class="btn-actions pull-right btn btn-success" data-toggle="modal" data-target="#edit{{anuncio.id}}">
                     <span class="pull-right glyphicon glyphicon-pencil"></span>
                 </button>
             </div>
@@ -68,6 +68,32 @@
             </div>
         </div>
     </div>
+{% endfor %}
+{% for formAnuncio in editforms %}
+	<div>
+		<div id="edit{{formAnuncio.id.value}}" class="modal fade" role="form">
+			<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Editar Anuncio</h4>
+						</div>
+						<form action="salvaredicoes" method="post">
+							<div class="form-group">
+								<div class="modal-body" data-id="{{formAnuncio.id.value}}" >
+									{% csrf_token %}
+									{{formAnuncio}}
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="submit" class="btn btn-primary">Salvar Alterações</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endfor %}
 </div>
 {% endblock content %}

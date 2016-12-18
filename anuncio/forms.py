@@ -17,10 +17,21 @@ import datetime
 #   t ("termo") e um CharField para input de texto com limite de ate 100 caracteres.
 ####################################################################################################
 class formBusca(forms.Form):
-    t = forms.CharField(max_length = 100, widget=forms.TextInput(attrs={'placeholder': 'Buscar Anuncios', 'class':'form-control'}))
+    t = forms.CharField(max_length = 100, label='', widget=forms.TextInput(attrs={'placeholder': 'Buscar Anuncios', 'class':'form-control'}))
 
+    
+###################################################################################################
+#Classe que representa uma form de edição de anuncios
+#
+#Nome: formBusca
+#Autores: Igor Abreu, Renan Basilio
+#Versao: 0.1
+#
+#Parametros:
+####################################################################################################
 class formAnuncio(forms.ModelForm):
-    anunciante   = forms.ModelChoiceField(queryset=User.objects.all(), widget=forms.Select(attrs={'class': 'insert-form form-control'}))
+    id           = forms.IntegerField(widget=forms.HiddenInput())
+    anunciante   = forms.ModelChoiceField(widget=forms.HiddenInput(), queryset=User.objects.all())
     titulo       = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': 'insert-form form-control'}))
     descricao    = forms.CharField(max_length=4000, widget=forms.Textarea(attrs={'rows': 10, 'class': 'insert-form form-control'}))
     data_inicio  = forms.SplitDateTimeField(widget=widgets.AdminSplitDateTime(attrs={'class': 'insert-form form-control datetimepicker'}))
@@ -34,12 +45,14 @@ class formAnuncio(forms.ModelForm):
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Anuncio
-        exclude = ['odiar', 'amar', 'curtir']
+        exclude = ['anunciante', 'odiar', 'amar', 'curtir', 'aprovado', 'ap_pendente', 'data_criacao']
 
     def __init__(self, *args, **kwargs):
         super(formAnuncio, self).__init__(*args, **kwargs)
         self.fields['data_inicio'].widget = widgets.AdminSplitDateTime()
         self.fields['data_fim'].widget = widgets.AdminSplitDateTime()
+        if kwargs.get('instance'):
+            id = kwargs.get('instance').id
 
 class formUsuario(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)

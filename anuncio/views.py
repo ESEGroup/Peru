@@ -31,7 +31,8 @@ from .forms import formBusca, formAnuncio, formUsuario #
 def anuncio(request):
     anuncios = getTodosAnunciosValidos()
     form = formBusca()
-    return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':"Localidade "})
+    edit_forms = getFormsEdicaoDeAnuncios(anuncios)
+    return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':"Localidade ", 'editforms':edit_forms })
 
 
 ###################################################################################################
@@ -51,7 +52,7 @@ def anuncioPorLocal(request, localidade):
     anuncios = getAnunciosPorLocalidade(localidade)
     nome_local = Localidade.objects.get(nome_filtro=localidade).nome + ' '
     form = formBusca()
-    return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':nome_local})
+    return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':nome_local, 'editforms':edit_forms})
 
 
 ###################################################################################################
@@ -70,7 +71,7 @@ def anuncioPorLocal(request, localidade):
 def anuncioPorBusca(request):
     form = formBusca(request.GET)
     anuncios = getAnunciosPorSubstring(request.GET.get('t'))
-    return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':"Localidade "})
+    return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':"Localidade ", 'editforms':edit_forms})
     
 
 ###################################################################################################
@@ -91,7 +92,7 @@ def anuncioPorUsuario(request):
     if request.user.is_authenticated():
         form = formBusca()
         anuncios = getAnunciosPorUsuario(request.user)
-        return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':"Localidade "})
+        return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':"Localidade ", 'editforms':edit_forms})
     else:
         return HttpResponseForbidden()
         
@@ -118,7 +119,7 @@ def anuncioPendendoAp(request):
         if True:    ## Verificar se o usuario possui permissao para aprovar anuncios
             form=formBusca()
             anuncios = getAnunciosApPendente()
-            return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':"Localidade "})
+            return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':"Localidade ", 'editforms':edit_forms})
         else:
             return HttpResponseForbidden()
     else:
@@ -172,6 +173,23 @@ def inserirAnuncio(request):
 
     return render(request, 'anuncios/inserir.html', {'formInsert':form, 'formBusca':form_busca, 'localidade':"Localidade "})
 
+def getFormsEdicaoDeAnuncios(listaAnuncios):
+    edit_forms = list()
+    for anuncio in listaAnuncios:
+        edit_form = formAnuncio(instance=anuncio)
+        edit_forms.append(edit_form)
+    return edit_forms
+
+    
+def salvar_edicoes(request):
+    if request.method == 'POST':
+        anuncio_modificado = request.POST
+        anuncio = Anuncio.objects.get(id=anuncio_modificado.get('id'))
+        anuncio.titulo = anuncio_modificado.get('titulo')
+        anuncio.descricao = anuncio_modificado.get('descricao')
+        anuncio.save()
+    return HttpResponseRedirect('/')
+        
 class formUsuarioView(View):
     form_class = formUsuario
     template_name = 'anuncios/cadastro.html'
@@ -200,3 +218,5 @@ class formUsuarioView(View):
                     login(request, user)
                     return redirect('anuncios.index')
         return render(request, self.template_name, {'form': form})
+
+        

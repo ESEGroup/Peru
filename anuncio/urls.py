@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^reacao/$', views.reacao, name='reacao'),
     url(r'^delete/$', views.delete, name='delete'),
     url(r'^aprovar/$', views.aprovar, name='aprovar'),
+    url(r'^salvaredicoes', views.salvar_edicoes),
     url(r'^meus/$', views.anuncioPorUsuario),
     url(r'^pendentes/$', views.anuncioPendendoAp),
     url(r'^inserir/$', views.inserirAnuncio)
