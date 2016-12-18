@@ -1,5 +1,5 @@
 from django import forms
-from .models import Anuncio, Localidade
+from .models import Anuncio, Localidade, Usuario #
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.admin import widgets
@@ -40,3 +40,10 @@ class formAnuncio(forms.ModelForm):
         super(formAnuncio, self).__init__(*args, **kwargs)
         self.fields['data_inicio'].widget = widgets.AdminSplitDateTime()
         self.fields['data_fim'].widget = widgets.AdminSplitDateTime()
+
+class formUsuario(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = Usuario
+        fields = ['nome','username', 'email', 'descricao','celular' , 'password']

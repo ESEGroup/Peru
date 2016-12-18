@@ -1,12 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden
 from django import forms
+from django.shortcuts import render, redirect #
+from django.contrib.auth import authenticate, login #
+from django.views import generic #
+from django.views.generic import View #
 from .models import Anuncio
 from .models import Localidade
+from .models import Usuario #
 from django.utils import timezone
 from datetime import datetime
 from .filters import *
-from .forms import formBusca, formAnuncio
+from .forms import formBusca, formAnuncio, formUsuario #
 
 # Create your views here.
 
@@ -160,9 +165,38 @@ def inserirAnuncio(request):
         if form.is_valid():
             form.save(commit=True)
             return HttpResponseRedirect('/')
-        else:
-            print form.errors
+   #     else:
+   #         print form.errors
     else:
         form = formAnuncio()
 
     return render(request, 'anuncios/inserir.html', {'formInsert':form, 'formBusca':form_busca, 'localidade':"Localidade "})
+
+class formUsuarioView(View):
+    form_class = formUsuario
+    template_name = 'anuncios/cadastro.html'
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            nome = form.cleaned_data['nome']
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            celular = form.cleaned_data['celular']
+            descricao = form.cleaned_data['descricao']
+            password = form.cleaned_data['password']
+            user.set_password(password)
+            user.save()
+
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+
+                if user.is_active:
+                    login(request, user)
+                    return redirect('anuncios.index')
+        return render(request, self.template_name, {'form': form})

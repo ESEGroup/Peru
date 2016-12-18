@@ -1,6 +1,7 @@
 from django.utils import timezone
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User #
 
 class Anuncio(models.Model):
     id           = models.AutoField(primary_key=True)
@@ -70,4 +71,11 @@ class Localidade(models.Model):
     parent      = models.ForeignKey('Localidade', blank=True, null=True)
 
     def __unicode__(self):
+        return self.nome
+
+class Usuario(User):
+    nome = models.CharField(max_length=256)
+    celular = models.CharField(max_length=256)
+    descricao = models.CharField(max_length=256)
+    def __str__(self):
         return self.nome

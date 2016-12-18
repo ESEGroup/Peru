@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.anuncio),
     url(r'^busca', views.anuncioPorBusca),
+    url(r'^registrar/$', views.formUsuarioView.as_view(), name='registro'),
     url(r'^loc=(?P<localidade>\w+)', views.anuncioPorLocal),
     url(r'^loc=(?P<localidade>\w+)/busca', views.anuncioPorLocal),
     url(r'^reacao/$', views.reacao, name='reacao'),
