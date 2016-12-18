@@ -30,8 +30,7 @@ class formBusca(forms.Form):
 #Parametros:
 ####################################################################################################
 class formAnuncio(forms.ModelForm):
-    id           = forms.IntegerField(widget=forms.HiddenInput())
-    anunciante   = forms.ModelChoiceField(widget=forms.HiddenInput(), queryset=User.objects.all())
+    anunciante   = forms.ModelChoiceField(queryset=User.objects.all(), widget=forms.Select(attrs={'class': 'insert-form form-control'}))
     titulo       = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': 'insert-form form-control'}))
     descricao    = forms.CharField(max_length=4000, widget=forms.Textarea(attrs={'rows': 10, 'class': 'insert-form form-control'}))
     data_inicio  = forms.SplitDateTimeField(widget=widgets.AdminSplitDateTime(attrs={'class': 'insert-form form-control datetimepicker'}))
@@ -45,10 +44,35 @@ class formAnuncio(forms.ModelForm):
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Anuncio
-        exclude = ['anunciante', 'odiar', 'amar', 'curtir', 'aprovado', 'ap_pendente', 'data_criacao']
+        exclude = ['odiar', 'amar', 'curtir']
 
     def __init__(self, *args, **kwargs):
         super(formAnuncio, self).__init__(*args, **kwargs)
+        self.fields['data_inicio'].widget = widgets.AdminSplitDateTime()
+        self.fields['data_fim'].widget = widgets.AdminSplitDateTime()
+        if kwargs.get('instance'):
+            id = kwargs.get('instance').id
+
+class formAnuncioEdit(forms.ModelForm):
+    id           = forms.IntegerField(widget=forms.HiddenInput())
+    anunciante   = forms.ModelChoiceField(queryset=User.objects.all(), widget=forms.Select(attrs={'class': 'insert-form form-control'}))
+    titulo       = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class': 'insert-form form-control'}))
+    descricao    = forms.CharField(max_length=4000, widget=forms.Textarea(attrs={'rows': 10, 'class': 'insert-form form-control'}))
+    data_inicio  = forms.SplitDateTimeField(widget=widgets.AdminSplitDateTime(attrs={'class': 'insert-form form-control datetimepicker'}))
+    data_fim     = forms.SplitDateTimeField(widget=widgets.AdminSplitDateTime(attrs={'class': 'insert-form form-control datetimepicker'}))
+    localidade   = forms.ModelChoiceField(queryset=Localidade.objects.all(), widget=forms.Select(attrs={'class': 'insert-form form-control'}))
+    aprovado     = forms.BooleanField(widget=forms.HiddenInput(), initial=False, required=False)
+    ap_pendente  = forms.BooleanField(widget=forms.HiddenInput(), initial=True, required=False)
+    data_criacao = forms.DateTimeField(widget=forms.HiddenInput(), initial=timezone.now, required=False)
+
+    # An inline class to provide additional information on the form.
+    class Meta:
+        # Provide an association between the ModelForm and a model
+        model = Anuncio
+        exclude = ['odiar', 'amar', 'curtir', 'aprovado', 'ap_pendente', 'data_criacao']
+
+    def __init__(self, *args, **kwargs):
+        super(formAnuncioEdit, self).__init__(*args, **kwargs)
         self.fields['data_inicio'].widget = widgets.AdminSplitDateTime()
         self.fields['data_fim'].widget = widgets.AdminSplitDateTime()
         if kwargs.get('instance'):
