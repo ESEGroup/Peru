@@ -181,16 +181,20 @@ def getFormsEdicaoDeAnuncios(listaAnuncios):
         edit_forms.append(edit_form)
     return edit_forms
 
-    
+
 def salvar_edicoes(request):
     if request.method == 'POST':
-        anuncio_modificado = request.POST
-        anuncio = Anuncio.objects.get(id=anuncio_modificado.get('id'))
-        anuncio.titulo = anuncio_modificado.get('titulo')
-        anuncio.descricao = anuncio_modificado.get('descricao')
+        anuncio_modificado   = request.POST
+        print anuncio_modificado
+        anuncio             = Anuncio.objects.get(id=anuncio_modificado.get('id'))
+        anuncio.titulo      = anuncio_modificado.get('titulo')
+        anuncio.descricao   = anuncio_modificado.get('descricao')
+        anuncio.data_inicio = anuncio_modificado.get('data_inicio_0') + " " + anuncio_modificado.get('data_inicio_1')
+        anuncio.data_fim    = anuncio_modificado.get('data_fim_0') + " " + anuncio_modificado.get('data_fim_1')
+        print anuncio.data_inicio
         anuncio.save()
     return HttpResponseRedirect('/')
-        
+
 class formUsuarioView(View):
     form_class = formUsuario
     template_name = 'anuncios/cadastro.html'
