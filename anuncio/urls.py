@@ -13,5 +13,7 @@ urlpatterns = [
     url(r'^salvaredicoes', views.salvar_edicoes),
     url(r'^meus/$', views.anuncioPorUsuario),
     url(r'^pendentes/$', views.anuncioPendendoAp),
-    url(r'^inserir/$', views.inserirAnuncio)
+    url(r'^inserir/$', views.inserirAnuncio),
+    url(r'^logout/$', views.logout_view),
+     url(r'^login/$', views.login_view.as_view(), name='login'),
 ]

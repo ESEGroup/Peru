@@ -45,7 +45,11 @@
                         <li><a href="..\pendentes">Aprovar Anúncios</a></li>
                     </ul>
                 </li>
-                <li><a href="..\admin">Login</a></li>
+                {% if not request.user.is_authenticated %}
+                <li><a href="..\login">Login</a></li>
+                {% else %}
+                <li><a href="\logout\">Logout</a></li>
+                {% endif %}
             </ul>
             <form class="navbar-form navbar-right" action="busca" method="get">
 				<div class="form-group">

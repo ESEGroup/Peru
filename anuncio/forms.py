@@ -1,5 +1,5 @@
 from django import forms
-from .models import Anuncio, Localidade, Usuario #
+from .models import Anuncio, Localidade, Usuario, Login #
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.admin import widgets
@@ -89,3 +89,11 @@ class formUsuario(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = ['nome', 'username', 'email', 'descricao', 'celular', 'password']
+
+class formLogin(forms.ModelForm):
+    password  = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'insert-form form-control'}))
+    username  = forms.CharField(max_length=256, widget=forms.TextInput(attrs={'class': 'insert-form form-control'}))
+
+    class Meta:
+        model = Login
+        fields = ['username', 'password']

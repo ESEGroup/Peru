@@ -11,7 +11,7 @@ from .models import Usuario
 from django.utils import timezone
 from datetime import datetime
 from .filters import *
-from .forms import formBusca, formAnuncio, formAnuncioEdit, formUsuario #
+from .forms import formBusca, formAnuncio, formAnuncioEdit, formUsuario, formLogin #
 
 # Create your views here.
 
@@ -176,7 +176,7 @@ def inserirAnuncio(request):
             return HttpResponseRedirect('/')
         else:
             print "2"
-            print form.errors
+            print (form.errors)
     else:
         print "3"
         form = formAnuncio()
@@ -237,18 +237,30 @@ class formUsuarioView(View):
                     return redirect('../')
         return render(request, self.template_name, {'form': form, 'formBusca':form_busca, 'localidade':"Localidade "})
 
-def login_view(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(username=username, password=password)
-    if user is not None:
-        if user.is_active:
-            login(request, user)
-            return redirect('../')
-        else:
-            print "Sua conta foi desabilitada!"
-    else:
-        print "Seu nome de usuario e/ou senha estão incorretos."
+class login_view(View):
+    form_class = formLogin
+    template_name = 'anuncios/login.html'
+    def get(self, request):
+        form_busca = formBusca()
+        form = self.form_class(None)
+        return render(request, self.template_name, {'form': form, 'formBusca':form_busca, 'localidade':"Localidade "})
+
+    def post(self, request):
+        form_busca = formBusca()
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('../')
+                else:
+                    print "Sua conta foi desabilitada!"
+            else:
+                print "Seu nome de usuario e/ou senha estão incorretos."
+        return render(request, self.template_name, {'form': form, 'formBusca':form_busca, 'localidade':"Localidade "})
 
 def logout_view(request):
     logout(request)
