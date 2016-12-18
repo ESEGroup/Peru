@@ -11,7 +11,7 @@ from .models import Usuario #
 from django.utils import timezone
 from datetime import datetime
 from .filters import *
-from .forms import formBusca, formAnuncio, formUsuario #
+from .forms import formBusca, formAnuncio, formAnuncioEdit, formUsuario #
 
 # Create your views here.
 
@@ -164,20 +164,24 @@ def inserirAnuncio(request):
     form_busca = formBusca()
     if request.method == 'POST':
         form = formAnuncio(request.POST)
+        print "0"
         if form.is_valid():
+            print "1"
             form.save(commit=True)
             return HttpResponseRedirect('/')
         else:
+            print "2"
             print form.errors
     else:
+        print "3"
         form = formAnuncio()
-
+    print "4"
     return render(request, 'anuncios/inserir.html', {'formInsert':form, 'formBusca':form_busca, 'localidade':"Localidade "})
 
 def getFormsEdicaoDeAnuncios(listaAnuncios):
     edit_forms = list()
     for anuncio in listaAnuncios:
-        edit_form = formAnuncio(instance=anuncio)
+        edit_form = formAnuncioEdit(instance=anuncio)
         edit_forms.append(edit_form)
     return edit_forms
 
