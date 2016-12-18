@@ -167,8 +167,8 @@ def inserirAnuncio(request):
         if form.is_valid():
             form.save(commit=True)
             return HttpResponseRedirect('/')
-   #     else:
-   #         print form.errors
+        else:
+            print form.errors
     else:
         form = formAnuncio()
 
