@@ -199,19 +199,21 @@ class formUsuarioView(View):
     form_class = formUsuario
     template_name = 'anuncios/cadastro.html'
     def get(self, request):
+        form_busca = formBusca()
         form = self.form_class(None)
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'formBusca':form_busca, 'localidade':"Localidade "})
 
     def post(self, request):
+        form_busca = formBusca()
         form = self.form_class(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            nome = form.cleaned_data['nome']
-            username = form.cleaned_data['username']
-            email = form.cleaned_data['email']
-            celular = form.cleaned_data['celular']
+            user      = form.save(commit=False)
+            nome      = form.cleaned_data['nome']
+            username  = form.cleaned_data['username']
+            email     = form.cleaned_data['email']
+            celular   = form.cleaned_data['celular']
             descricao = form.cleaned_data['descricao']
-            password = form.cleaned_data['password']
+            password  = form.cleaned_data['password']
             user.set_password(password)
             user.save()
 
@@ -222,6 +224,6 @@ class formUsuarioView(View):
                 if user.is_active:
                     login(request, user)
                     return redirect('anuncios.index')
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'formBusca':form_busca, 'localidade':"Localidade "})
 
-        
+
