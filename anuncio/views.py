@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden
 from django import forms
-from django.shortcuts import render, redirect #
-from django.contrib.auth import authenticate, login #
-from django.views import generic #
-from django.views.generic import View #
+from django.shortcuts import render, redirect 
+from django.contrib.auth import authenticate, login, logout 
+from django.views import generic 
+from django.views.generic import View 
 from .models import Anuncio
 from .models import Localidade
-from .models import Usuario #
+from .models import Usuario 
 from django.utils import timezone
 from datetime import datetime
 from .filters import *
@@ -233,4 +233,20 @@ class formUsuarioView(View):
                     return redirect('../')
         return render(request, self.template_name, {'form': form, 'formBusca':form_busca, 'localidade':"Localidade "})
 
+def login_view(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            return redirect('../')
+        else:
+            print "Sua conta foi desabilitada!"
+    else:
+        print "Seu nome de usuario e/ou senha estão incorretos."
+
+def logout_view(request):
+    logout(request)
+    return redirect('../')
 
