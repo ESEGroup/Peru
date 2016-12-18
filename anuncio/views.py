@@ -71,6 +71,7 @@ def anuncioPorLocal(request, localidade):
 ####################################################################################################
 def anuncioPorBusca(request):
     form = formBusca(request.GET)
+    edit_forms = getFormsEdicaoDeAnuncios(anuncios)
     anuncios = getAnunciosPorSubstring(request.GET.get('t'))
     return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':"Localidade ", 'editforms':edit_forms})
 
@@ -92,6 +93,7 @@ def anuncioPorBusca(request):
 def anuncioPorUsuario(request):
     if request.user.is_authenticated():
         form = formBusca()
+        edit_forms = getFormsEdicaoDeAnuncios(anuncios)
         anuncios = getAnunciosPorUsuario(request.user)
         return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':"Localidade ", 'editforms':edit_forms})
     else:
@@ -120,6 +122,7 @@ def anuncioPendendoAp(request):
         if True:    ## Verificar se o usuario possui permissao para aprovar anuncios
             form=formBusca()
             anuncios = getAnunciosApPendente()
+            edit_forms = getFormsEdicaoDeAnuncios(anuncios)
             return render(request, 'anuncios/anuncios.html', {'anuncios': anuncios, 'formBusca':form, 'localidade':"Localidade ", 'editforms':edit_forms})
         else:
             return HttpResponseForbidden()
