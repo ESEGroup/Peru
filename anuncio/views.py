@@ -149,7 +149,9 @@ def delete(request):
         anuncioId = request.GET.get('id')
     if anuncioId:
         anuncio = Anuncio.objects.get(id=int(anuncioId))
-        anuncio.delete()
+        anuncio.aprovado = False
+        anuncio.ap_pendente = False
+        anuncio.save()
     return HttpResponse()
 
 def aprovar(request):
@@ -198,6 +200,8 @@ def salvar_edicoes(request):
         anuncio.descricao   = anuncio_modificado.get('descricao')
         anuncio.data_inicio = anuncio_modificado.get('data_inicio_0') + " " + anuncio_modificado.get('data_inicio_1')
         anuncio.data_fim    = anuncio_modificado.get('data_fim_0') + " " + anuncio_modificado.get('data_fim_1')
+        anuncio.aprovado = False
+        anuncio.ap_pendente = True
         print anuncio.data_inicio
         anuncio.save()
     return HttpResponseRedirect('/')
