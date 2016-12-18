@@ -19,9 +19,9 @@ import datetime
 class formBusca(forms.Form):
     t = forms.CharField(max_length = 100, label='', widget=forms.TextInput(attrs={'placeholder': 'Buscar Anuncios', 'class':'form-control'}))
 
-    
+
 ###################################################################################################
-#Classe que representa uma form de edição de anuncios
+#Classe que representa uma form de edicao de anuncios
 #
 #Nome: formBusca
 #Autores: Igor Abreu, Renan Basilio
@@ -55,8 +55,13 @@ class formAnuncio(forms.ModelForm):
             id = kwargs.get('instance').id
 
 class formUsuario(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
+    password  = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'insert-form form-control'}))
+    nome      = forms.CharField(max_length=256, widget=forms.TextInput(attrs={'class': 'insert-form form-control'}))
+    username  = forms.CharField(max_length=256, widget=forms.TextInput(attrs={'class': 'insert-form form-control'}))
+    email     = forms.CharField(max_length=256, widget=forms.EmailInput(attrs={'class': 'insert-form form-control'}))
+    descricao = forms.CharField(max_length=4000, widget=forms.Textarea(attrs={'rows': 10, 'class': 'insert-form form-control'}))
+    celular   = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'insert-form form-control'}))
 
     class Meta:
         model = Usuario
-        fields = ['nome','username', 'email', 'descricao','celular' , 'password']
+        fields = ['nome', 'username', 'email', 'descricao', 'celular', 'password']
