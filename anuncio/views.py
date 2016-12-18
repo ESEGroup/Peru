@@ -169,18 +169,18 @@ def inserirAnuncio(request):
     form_busca = formBusca()
     if request.method == 'POST':
         form = formAnuncio(request.POST)
-        print "0"
+        print("0")
         if form.is_valid():
-            print "1"
+            print("1")
             form.save(commit=True)
             return HttpResponseRedirect('/')
         else:
-            print "2"
-            print (form.errors)
+            print("2")
+            print(form.errors)
     else:
-        print "3"
+        print("3")
         form = formAnuncio()
-    print "4"
+    print("4")
     return render(request, 'anuncios/inserir.html', {'formInsert':form, 'formBusca':form_busca, 'localidade':"Localidade "})
 
 def getFormsEdicaoDeAnuncios(listaAnuncios):
@@ -194,7 +194,7 @@ def getFormsEdicaoDeAnuncios(listaAnuncios):
 def salvar_edicoes(request):
     if request.method == 'POST':
         anuncio_modificado   = request.POST
-        print anuncio_modificado
+        print(anuncio_modificado)
         anuncio             = Anuncio.objects.get(id=anuncio_modificado.get('id'))
         anuncio.titulo      = anuncio_modificado.get('titulo')
         anuncio.descricao   = anuncio_modificado.get('descricao')
@@ -202,7 +202,7 @@ def salvar_edicoes(request):
         anuncio.data_fim    = anuncio_modificado.get('data_fim_0') + " " + anuncio_modificado.get('data_fim_1')
         anuncio.aprovado = False
         anuncio.ap_pendente = True
-        print anuncio.data_inicio
+        print(anuncio.data_inicio)
         anuncio.save()
     return HttpResponseRedirect('/')
 
@@ -257,9 +257,9 @@ class login_view(View):
                     login(request, user)
                     return redirect('../')
                 else:
-                    print "Sua conta foi desabilitada!"
+                    print("Sua conta foi desabilitada!")
             else:
-                print "Seu nome de usuario e/ou senha estão incorretos."
+                print("Seu nome de usuario e/ou senha estão incorretos.")
         return render(request, self.template_name, {'form': form, 'formBusca':form_busca, 'localidade':"Localidade "})
 
 def logout_view(request):
