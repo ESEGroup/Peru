@@ -1,0 +1,14 @@
+Cadastro de Eventos: Anunciante, Administrador Central, Administradores;
+Cadastro de Anuncios: Adiministrador Central e Administradores;
+Aprovacao de Eventos: Adiministrador Central e Administradores;
+Cadastro de Anunciantes: Administrador Central ou Administradores;
+Cadastro de Administradores: Administrador Central;
+Alterar anuncios: Anunciante (Mediante a uma aprovacao de eventos)
+Alterar anuncios: Administrador Central ou Aministradores;
+Remocao de anuncios: Anunciantes;
+Remocao de anuncios: Administrador Central ou Administradores;
+Buscar anuncio: Usuario;
+Visualizar anuncia: Usuarios;
+Reagir anuncio: Usuarios;
+Exibir anuncio: Painel, time argentina;
+Autenticacao de usuarios: Anunciante, Administrador Central, Administrador.

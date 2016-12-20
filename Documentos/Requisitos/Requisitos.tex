@@ -1,0 +1,331 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage[portuges]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{indentfirst}
+\usepackage{blindtext}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{gensymb}
+\usepackage[top=2cm, bottom=2cm, left=3cm, right=2cm]{geometry}
+\usepackage[table]{xcolor}
+\usepackage{pbox}
+\author{Time Peru}
+
+\title{Painel Digital - Engenharia de Software 2016/02}
+\begin{document}
+
+\begin{minipage}[c][3cm][c]{3cm}
+	\includegraphics[height=3cm]{img/ufrj_logo.png}
+\end{minipage}
+\begin{minipage}[c][3cm][c]{10cm}
+	Universidade Federal do Rio de Janeiro \\
+	EEL873 - Engenharia  de Software \\
+	Projeto de Disciplina: Sistema Web
+\end{minipage}
+
+\begin{table}[ht]
+	\rowcolors{1}{}{}
+	\centering
+
+	\begin{tabular}{p{6cm}p{10cm}}
+		\hline
+		\cellcolor{gray} & \cellcolor{gray}\\
+		\hline
+		\pbox{20cm}{Nome do Projeto: \\ Painel Digital}
+		&\pbox{20cm}{Data de Solicitação: \\ 15 de Setembro de 2016}\\[2ex]
+		\hline
+		\pbox{20cm}{Responsável: \\ Time Peru}\\[2ex]
+		\hline
+		\pbox{20cm}{Solicitante: \\ Guilherme Horta Tavassos}
+		&\pbox{10cm}{Clientes: \\ Fábio Farzat, Guilherme Travassos, Hilmer Neri, Talita Ribeiro}\\[4ex]
+		\hline
+		\cellcolor{gray} & \cellcolor{gray}\\
+		\hline
+	\end{tabular}
+\end{table}%
+
+\begin{table}[ht]
+	\rowcolors{1}{}{}
+	\centering
+
+	\begin{tabular}{p{2cm}p{8cm}p{4cm}p{1cm}}
+		\hline
+		\cellcolor{gray}Data&\cellcolor{gray}Comentário&\cellcolor{gray}Autor&\cellcolor{gray}Versão  \\
+		\hline
+		2016/09/28&Levantamento inicial de requisitos &CF, IA e LO&0.1\\
+        2016/10/04&Atualiza\c{c}\~ao dos requisitos ap\'{o}s mentoring&CF, IA, LO e RB&0.2\\
+        2016/10/06&Reorganiza\c{c}\~ao dos requisitos e do gloss\'{a}rio&AS, CF, IA, LO e RB&0.3\\
+		\hline
+
+	\end{tabular}
+\end{table}%
+\vspace{100pt}
+\begin{center}
+	\huge{Painel Digital - Time Peru}
+	\vspace{95pt}
+\end{center}
+\newpage
+\tableofcontents
+\newpage
+\section{Visão}
+O problema da comunicação interna aos docentes, discentes, funcionários e visitantes da UFRJ sobre os eventos e acontecimentos atuais nos campi por onde transitam afetam docentes, discentes, funcionários e visitantes da
+universidade cujo impacto é a comunicação pouco efetiva e eficiente das atividades, cursos e eventos programados para
+acontecer nos diferentes centros da universidade durante determinados períodos do ano. Uma boa solução seria um painel digital interativo no qual possam ser disponibilizados informações sobre eventos, cursos e demais atividades que acontecem na UFRJ em determinados períodos do ano.
+
+\subsection{Escopo do Projeto}
+O projeto consiste em desenvolver um sistema para gerenciamento de
+anúncios de atividades, cursos, eventos e vagas para bolsas e estágios relacionados
+com a UFRJ. Esses anúncios deverão ser cadastrados por interessados em divulgação
+de eventos, cursos e demais atividades que necessariamente ocorrerão dentro dos
+diferentes campi da universidade. Informações sobre os anúncios (detalhes, data e
+local) bem como informações de período em que esses anúncios ficarão disponíveis
+para visualização e locais (centros) em que esses informativos possam ser de maior
+interesse do público deverão ser informados. É previsto que administradores possam
+publicar e despublicar anúncios a qualquer momento, mesmo que esses ainda não
+tenham expirado sua data de publicação. A visualização desses anúncios ocorrerá via
+painéis digitais a serem instalados em diversos pontos da UFRJ. A atualização dos
+anúncios ocorrerá de forma automática baseando-se em configuração temporal
+periódica indicada por administradores do sistema e nas informações cadastradas
+para cada anúncio referentes a período e locais para publicação.
+
+O painel digital deverá ser interativo, o que significa dizer que o usuário
+poderá selecionar tipos de anúncios de seu interesse para visualização e ainda
+interagir com o anúncio indicando sua reação (curtir, amar, enfurecer…) em relação a
+ele.
+\subsection{Escopo não incluído no Projeto}
+Toda a gerencia dos dados referentes as bolsas serão importados diretamente do sistema de gerenciamento e ofertas de bolsas e estágios da UFRJ. A inclusão/exclusão/modificação deverá ser feita no sistema integrado, o Painel digital será responsável somente pela visualização destas informações.
+\newpage
+\subsection{Envolvidos no Projeto}
+\begin{table}[ht]
+	\rowcolors{1}{}{}
+	\centering
+
+	\begin{tabular}{p{7cm}p{7cm}}
+		\hline
+		\cellcolor{gray}Nome&\cellcolor{gray}Papel  \\
+		\hline
+		Anderson de Souza&Engenheiro de Software Peru\\
+		Carlos Felipe&Engenheiro de Software Peru\\
+		Igor Abreu&Engenheiro de Software Peru\\
+		Luis Octavio&Engenheiro de Software Peru\\
+		Renan Fasolato&Engenheiro de Software Peru\\
+		Fábio Farzat&Cliente\\
+		Guilherme Travassos&Cliente\\
+		Hilmer Neri&Cliente\\
+		Talita Ribeiro&Cliente\\
+		Ana Paula&Time de Integração Argentina\\
+		Carlos Eduardo&Time de Integração Argentina\\
+		Hellen Pereira&Time de Integração Argentina\\
+		Luis Felipe&Time de Integração Argentina\\
+		Rafael Gonçalves&Time de Integração Argentina\\
+		\hline
+	\end{tabular}
+\end{table}
+\subsection{Glossário}
+\begin{table}[ht]
+	\rowcolors{1}{}{}
+	\centering
+
+	\begin{tabular}{p{3cm}p{12cm}}
+		\hline
+		\cellcolor{gray}Termo&\cellcolor{gray}Descrição  \\
+		\hline
+		RFXX&Requisitos funcionais, seguido por um índice numérico sequencial\\
+		RNFXX&Requisitos não funcionais, seguido por um índice numérico sequencial\\
+        An\'{u}ncios&Eventos que devem ser aprovadas por um administrador antes de serem exibidos pelo sistema\\
+        Eventos&Cursos, vagas de est\'{a}gios, atividades da universidade e outros acontecimentos que possuem como atributos: Nome, descri\c{c}\~{a}o, detalhes, localidade e datas\\
+        Localidades&Centros Acad\^{e}micos e campi\\
+        Anunciantes&Usu\'{a}rios com privil\'{e}gios para inser\c{c}\~{a}o de an\'{u}ncios\\
+        Administradores&Usu\'{a}rios, inseridos pelo administrador central, com privil\'{e}gios para inser\c{c}\~{a}o de an\'{u}ncios e cadastro de Anunciantes\\
+        Administrador Central&Usu\'{a}rios com privil\'{e}gios para inser\c{c}\~{a}o de an\'{u}ncios e cadastro de Anunciantes e Administradores\\
+		\hline
+	\end{tabular}
+\end{table}
+\newpage
+\section{Requisitos do Sistema}
+\subsection{Requisitos Funcionais}
+\begin{table}[ht]
+	\rowcolors{1}{}{}
+	\centering
+
+	\begin{tabular}{p{2cm}p{7cm}p{2cm}p{2cm}}
+		\hline
+		\cellcolor{gray}Código&\cellcolor{gray}Descrição&\cellcolor{gray}Status&\cellcolor{gray}Prioridade  \\
+		\hline
+		RF01&O sistema deve permitir o cadastro de um ou mais administradores&Proposto&M\'{e}dia\\
+        RF02&O sistema deve permitir o cadastro de anunciantes&Proposto&M\'{e}dia\\
+        RF03&O sistema deve permitir o cadastro de an\'{u}ncios&Proposto&Alta\\
+        RF04&O sistema deve permitir a altera\c{c}\~{a}o dos an\'{u}ncios&Proposto&M\'{e}dia\\
+        RF05&O sistema deve permitir a remo\c{c}\~{a}o/cancelamento de an\'{u}ncios&Proposto&Alta\\
+        RF06&O sistema deve permitir a exibi\c{c}\~{a}o de an\'{u}ncios&Proposto&Alta\\
+        RF07&O sistema deve permitir a configura\c{c}\~{a}o de exibi\c{c}\~{a}o dos an\'{u}ncios&Proposto&M\'{e}dia\\
+        RF08&O sistema deve permitir a exibi\c{c}\~{a}o de bolsas e vagas de est\'{a}gio dispon\'{i}veis no sistema integrado desenvolvido pelo time Argentina&Proposto&Alta\\
+        RF09&O sistema deve permitir o registro de feedbacks para os an\'{u}ncios (curtir, amar e enfurecer)&Proposto&Baixa\\
+        RF10&O sistema deve manter o hist\'{o}rico de an\'{u}ncios&Proposto&Alta\\
+		\hline
+	\end{tabular}
+\end{table}
+\newpage
+\subsection{Requisitos Não Funcionais}
+\subsubsection{Requisitos de Comunicação de Dados, Interface e Interoperabilidade}
+	\begin{table}[ht]
+		\rowcolors{1}{}{}
+		\centering
+
+		\begin{tabular}{p{2cm}p{7cm}p{2cm}p{2cm}}
+			\hline
+			\cellcolor{gray}Código&\cellcolor{gray}Descrição&\cellcolor{gray}Status&\cellcolor{gray}Prioridade  \\
+			\hline
+            RNF01&O sistema deve realizar a leitura de dados do sistema de bolsas atrav\'{e}s de um arquivo disponibilizado pelo time Argentina&Proposto&M\'{e}dia\\
+			\hline
+		\end{tabular}
+	\end{table}%
+\subsubsection{Requisitos de Confiabilidade}
+\begin{table}[ht]
+	\rowcolors{1}{}{}
+	\centering
+
+	\begin{tabular}{p{2cm}p{7cm}p{2cm}p{2cm}}
+		\hline
+		\cellcolor{gray}Código&\cellcolor{gray}Descrição&\cellcolor{gray}Status&\cellcolor{gray}Prioridade  \\
+		\hline
+        RNF02&O sistema deve informar a hora da ultima atualiza\c{c}\~{a}o de dados do sistema de bolsas&Proposto&M\'{e}dia\\
+		\hline
+	\end{tabular}
+\end{table}%
+\subsubsection{Requisitos de Desempenho e Robustez}
+\begin{table}[ht]
+	\rowcolors{1}{}{}
+	\centering
+
+	\begin{tabular}{p{2cm}p{7cm}p{2cm}p{2cm}}
+		\hline
+		\cellcolor{gray}Código&\cellcolor{gray}Descrição&\cellcolor{gray}Status&\cellcolor{gray}Prioridade  \\
+		\hline
+		-&-&-&-\\
+		\hline
+	\end{tabular}
+\end{table}
+\newpage
+\subsubsection{Requisitos de Disponibilidade}
+\begin{table}[ht]
+	\rowcolors{1}{}{}
+	\centering
+
+	\begin{tabular}{p{2cm}p{7cm}p{2cm}p{2cm}}
+		\hline
+		\cellcolor{gray}Código&\cellcolor{gray}Descrição&\cellcolor{gray}Status&\cellcolor{gray}Prioridade  \\
+		\hline
+		RNF03&O sistema deve estar dispon\'{i}vel 24x7&Proposto&Baixa\\
+		\hline
+	\end{tabular}
+\end{table}
+\subsubsection{Requisitos de Manutenibilidade}
+\begin{table}[ht]
+	\rowcolors{1}{}{}
+	\centering
+
+	\begin{tabular}{p{2cm}p{7cm}p{2cm}p{2cm}}
+		\hline
+		\cellcolor{gray}Código&\cellcolor{gray}Descrição&\cellcolor{gray}Status&\cellcolor{gray}Prioridade  \\
+		\hline
+		RNF04&O sistema deve utilizar um pard\~{a}o \'{u}nico de escrita de c\'{o}digo&Proposto&Baixa\\
+		\hline
+	\end{tabular}
+\end{table}%
+\subsubsection{Requisitos de Portabilidade}
+\begin{table}[ht]
+	\rowcolors{1}{}{}
+	\centering
+
+	\begin{tabular}{p{2cm}p{7cm}p{2cm}p{2cm}}
+		\hline
+		\cellcolor{gray}Código&\cellcolor{gray}Descrição&\cellcolor{gray}Status&\cellcolor{gray}Prioridade  \\
+		\hline
+		RNF05&O sistema deve ter compatibilidade as novas ver\~{o}es do Google Chrome&Proposto&Alta\\
+        RNF06&O sistema deve ter compatibilidade as novas ver\~{o}es do Firefox&Proposto&Alta\\
+        RNF07&O sistema deve ter compatibilidade com diferentes resolu\c{c}\~{o}es de telas&Proposto&Alta\\
+		\hline
+	\end{tabular}
+\end{table}%
+\newpage
+\subsubsection{Requisitos de Segurança}
+\begin{table}[ht]
+	\rowcolors{1}{}{}
+	\centering
+
+	\begin{tabular}{p{2cm}p{7cm}p{2cm}p{2cm}}
+		\hline
+		\cellcolor{gray}Código&\cellcolor{gray}Descrição&\cellcolor{gray}Status&\cellcolor{gray}Prioridade  \\
+		\hline
+		RNF08&O sistema deve armazenar as senhas utilizando criptografia&Proposto&Alta\\
+        RNF09&O sistema deve utilizar captcha na inser\c{c}\~{a}o de an\'{u}ncios para evitar utiliza\c{c}\~{a}o de scripts&Proposto&Alta\\
+		\hline
+	\end{tabular}
+\end{table}%
+\subsubsection{Requisitos de Usabilidade}
+\begin{table}[ht]
+	\rowcolors{1}{}{}
+	\centering
+
+	\begin{tabular}{p{2cm}p{7cm}p{2cm}p{2cm}}
+		\hline
+		\cellcolor{gray}Código&\cellcolor{gray}Descrição&\cellcolor{gray}Status&\cellcolor{gray}Prioridade  \\
+		\hline
+		RNF10&O sistema deve utilizar os padr\~{o}es de acessibilidade WEB&Proposto&Baixa\\
+		\hline
+	\end{tabular}
+\end{table}%
+\subsubsection{Restrições de Projeto e Tecnológicas}
+\begin{table}[ht]
+	\rowcolors{1}{}{}
+	\centering
+
+	\begin{tabular}{p{2cm}p{7cm}p{2cm}p{2cm}}
+		\hline
+		\cellcolor{gray}Código&\cellcolor{gray}Descrição&\cellcolor{gray}Status&\cellcolor{gray}Prioridade  \\
+		\hline
+        RNF11&O sistema deve ser web&Proposto&Alta\\
+		\hline
+	\end{tabular}
+\end{table}%
+\newpage
+\subsubsection{Restrições Legais}
+\begin{table}[ht]
+	\rowcolors{1}{}{}
+	\centering
+
+	\begin{tabular}{p{2cm}p{7cm}p{2cm}p{2cm}}
+		\hline
+		\cellcolor{gray}Código&\cellcolor{gray}Descrição&\cellcolor{gray}Status&\cellcolor{gray}Prioridade  \\
+		\hline
+		-&-&-&-\\
+		\hline
+	\end{tabular}
+\end{table}
+\section{Referências}
+\begin{table}[ht]
+	\rowcolors{1}{}{}
+	\centering
+
+	\begin{tabular}{p{4cm}p{2cm}p{7.5cm}}
+		\hline
+		\cellcolor{gray}Título do Documento&\cellcolor{gray}Versão&\cellcolor{gray}Localização  \\
+		\hline
+		-&-&-\\
+		\hline
+	\end{tabular}
+\end{table}
+\section{Concordância do Cliente}
+Concordo com os requisitos listados neste documento. Estou ciente de que o planejamento do projeto será realizado com base nesses requisitos aprovados.
+\\\\
+\textbf{Nome:}
+\\
+\textbf{Cargo:}
+\\
+\textbf{Assinatura:}
+
+
+\end{document}
