@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden
 from django import forms
-from django.shortcuts import render, redirect 
-from django.contrib.auth import authenticate, login, logout 
-from django.views import generic 
-from django.views.generic import View 
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.views import generic
+from django.views.generic import View
 from .models import Anuncio
 from .models import Localidade
-from .models import Usuario 
+from .models import Usuario
 from django.utils import timezone
 from datetime import datetime
 from .filters import *
@@ -169,18 +169,13 @@ def inserirAnuncio(request):
     form_busca = formBusca()
     if request.method == 'POST':
         form = formAnuncio(request.POST)
-        print("0")
         if form.is_valid():
-            print("1")
             form.save(commit=True)
             return HttpResponseRedirect('/')
         else:
-            print("2")
             print(form.errors)
     else:
-        print("3")
         form = formAnuncio()
-    print("4")
     return render(request, 'anuncios/inserir.html', {'formInsert':form, 'formBusca':form_busca, 'localidade':"Localidade "})
 
 def getFormsEdicaoDeAnuncios(listaAnuncios):
@@ -259,7 +254,7 @@ class login_view(View):
                 else:
                     print("Sua conta foi desabilitada!")
             else:
-                print("Seu nome de usuario e/ou senha estão incorretos.")
+                print("Seu nome de usuario e/ou senha estao incorretos.")
         return render(request, self.template_name, {'form': form, 'formBusca':form_busca, 'localidade':"Localidade "})
 
 def logout_view(request):
