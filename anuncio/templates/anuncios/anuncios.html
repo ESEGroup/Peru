@@ -1,13 +1,23 @@
 {% extends 'anuncios/layout.html' %}
 
 {% block content %}
-
 <div class="container">
 {% for anuncio in anuncios %}
     <div class="col-lg-4">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <strong>{{ anuncio.titulo }}</strong>
+                <button type="button" name="delete" data-id="{{anuncio.id}}" class="btn-actions btn pull-right btn-success">
+                    <span class="pull-right glyphicon glyphicon-remove"></span>
+                </button>
+                {% if anuncio.ap_pendente == True and anuncio.aprovado == False %}
+                <button type="button" name="aceitar" data-id="{{anuncio.id}}" class="btn-actions btn pull-right btn-success">
+                    <span class="pull-right glyphicon glyphicon-ok"></span>
+                </button>
+                {% endif %}
+                <button type="button" name="editar" data-id="{{anuncio.id}}" class="btn-actions pull-right btn btn-success" data-toggle="modal" data-target="#edit{{anuncio.id}}">
+                    <span class="pull-right glyphicon glyphicon-pencil"></span>
+                </button>
             </div>
             <div class="panel-body">
                 <h5>
@@ -17,28 +27,39 @@
                 </h5>
                 <legend></legend>
                 <div class="evento progress">
-                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                        <span class="sr-only">20% Complete</span>
+                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{anuncio.progresso}}" aria-valuemin="0" aria-valuemax="100" style="width: {{anuncio.progresso}}%">
+                        <span class="sr-only">{{anuncio.progresso}}% Complete</span>
                     </div>
                 </div>
                 <div>
                     <span>
                         <small class="glyphicon glyphicon-calendar">
-                            <time class="pull-right" datetime="2008-11-01"> {{anuncio.data_inicio}}</time>
+                            <time class="pull-right" datetime="2008-11-01"> {{anuncio.getInicio}}</time>
                         </small>
                     </span>
                     <span class="pull-right">
                         <small class="glyphicon glyphicon-calendar">
-                            <time class="pull-right" datetime="2011-07-16"> {{anuncio.data_fim}}</time>
+                            <time class="pull-right" datetime="2011-07-16"> {{anuncio.getFim}}</time>
                         </small>
                     </span>
                 </div>
+                <div class="reactions btn-group btn-group-xs pull-right" role="group">
+                        <button data-type="amar" data-id="{{anuncio.id}}" type="button" class="btn btn-success">
+                            Amar <span id="acounter" class="badge">{{anuncio.amar}}</span>
+                        </button>
+                        <button data-type="curtir" data-id="{{anuncio.id}}" type="button" class="btn btn-primary">
+                            Curtir <span id="ccounter" class="badge">{{anuncio.curtir}}</span>
+                        </button>
+                        <button data-type="odiar" data-id="{{anuncio.id}}" type="button" class="btn btn-danger">
+                            Odiar <span id="ocounter" class="badge">{{anuncio.odiar}}</span>
+                        </button>
+                </div>
                 <div class="detalhes pull-right text-muted">
                     <small class="glyphicon glyphicon-calendar">
-                        <time class="pull-right" datetime="2011-07-16"> {{anuncio.data_criacao}}</time>
+                        <time class="pull-right" datetime="2011-07-16"> {{anuncio.getCriacao}}</time>
                     </small>
                     <span class="glyphicon glyphicon-map-marker"></span>
-                    <small>{{anuncio.localidade}}</small>
+                    <small>{{anuncio.localidade.nome}}</small>
                     <span class="glyphicon glyphicon-user"></span>
                     <small>{{anuncio.anunciante}}</small>
 
@@ -48,13 +69,32 @@
         </div>
     </div>
 {% endfor %}
+{% for formAnuncio in editforms %}
+	<div>
+		<div id="edit{{formAnuncio.id.value}}" class="modal fade" role="form">
+			<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Editar Anuncio</h4>
+						</div>
+						<form action="salvaredicoes" method="post">
+							<div class="form-group">
+								<div class="modal-body" data-id="{{formAnuncio.id.value}}" >
+									{% csrf_token %}
+									{{formAnuncio}}
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="submit" class="btn btn-primary">Salvar Alterações</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endfor %}
 </div>
 {% endblock content %}
-
-
-
-
-
-
-
 

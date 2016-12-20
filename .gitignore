@@ -1,2 +1,3 @@
 PainelDigital/PainelDigital/__pycache__/
-PainelDigital/db.sqlite3
+*.pyc
+anuncio/migrations/
